@@ -2,7 +2,7 @@ package extensions
 
 import model.OrderMenu
 
-fun String.convertOrderMenu(): List<OrderMenu> {
+fun String.toOrderMenu(): List<OrderMenu> {
     val orderMenu = arrayListOf<OrderMenu>()
     split(",").forEach { menu ->
         val menuAndCount = menu.split("-")
