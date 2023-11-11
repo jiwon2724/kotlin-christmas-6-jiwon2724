@@ -19,14 +19,13 @@ class OutputView {
 
     fun printTotalAmount(totalAmount: Int) {
         println(TOTAL_AMOUNT_HEADER)
-        println(AMOUNT_FORMAT.format(totalAmount))
-        println()
+        println("${AMOUNT_FORMAT.format(totalAmount)}\n")
     }
+
 
     fun printPresentMenu(presentMenu: Menu) {
         println(PRESENT_MENU_HEADER)
-        println(MENU_FORMAT.format(presentMenu.name, presentMenu.count))
-        println()
+        println("${MENU_FORMAT.format(presentMenu.name, presentMenu.count)}\n")
     }
 
     fun printBenefitDetails(benefitDetails: List<Benefit>) {
@@ -39,14 +38,12 @@ class OutputView {
 
     fun printTotalBenefitAmount(amount: Int) {
         println(TOTAL_BENEFIT_AMOUNT)
-        println(AMOUNT_FORMAT.format(amount))
-        println()
+        println("${AMOUNT_FORMAT.format(amount)}\n")
     }
 
     fun printExpectedPaymentAfterDiscount(payment: Int) {
         println(EXPECTED_PAYMENT_AFTER_DISCOUNT_HEADER)
-        println(AMOUNT_FORMAT.format(payment))
-        println()
+        println("${AMOUNT_FORMAT.format(payment)}\n")
     }
 
     fun printEventBadge(eventBadge: String) {
