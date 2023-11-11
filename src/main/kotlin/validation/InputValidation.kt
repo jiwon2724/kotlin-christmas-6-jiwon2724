@@ -10,14 +10,16 @@ class InputValidation {
 
     fun validateMenu(orderMenu: String) {
         val validMenu = orderMenu.split(",")
+        val orderResult = arrayListOf<String>()
         validMenu.forEach { menu ->
             require(menu.contains("-"))
-            val menuAndCount = menu.split("-")
-            val productName = menuAndCount[0]
-            val productOrderCount = menuAndCount[1]
+            val (productName, productOrderCount) = menu.split("-")
+            orderResult.add(productName)
             require(Menu.values().map { it.productName }.contains(productName))
             require((productOrderCount.toIntOrNull() != null) && (productOrderCount.toInt() > 0))
         }
+        val beverage = Menu.values().filter { it.type == "음료" }.map { it.productName }
+        require(!orderResult.all { beverage.contains(it) })
     }
 
     companion object {
