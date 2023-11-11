@@ -10,7 +10,7 @@ class OutputView {
     fun promptMenuAndCount() = println(ORDER_MENU_AND_COUNT)
     fun printEventPreview(day: Int) = println(EVENT_BENEFIT_PREVIEW.format(day))
 
-    fun printOrderMenus(orderMenu: List<OrderMenu>) {
+    fun printOrderMenus(orderMenu: List<Menu>) {
         println(ORDER_MENU_HEADER)
         orderMenu.forEach { menu ->
             println(MENU_FORMAT.format(menu.productName, menu.count))
@@ -57,7 +57,7 @@ class OutputView {
 
     companion object {
         private const val AMOUNT_FORMAT = "%s원"
-        private const val MENU_FORMAT = "%s원"
+        private const val MENU_FORMAT = "%d개"
         private const val WELCOME = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."
         private const val RESERVATION_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"
         private const val ORDER_MENU_AND_COUNT = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"
