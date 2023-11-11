@@ -7,10 +7,10 @@ fun String.convertOrderMenu(): List<OrderMenu> {
     split(",").forEach { menu ->
         val menuAndCount = menu.split("-")
         val productName = menuAndCount[0]
-        val count = menuAndCount[1].toInt()
+        val productOrderCount = menuAndCount[1].toInt()
         orderMenu.add(OrderMenu(
             productName = productName,
-            count = count
+            count = productOrderCount
         ))
     }
     return orderMenu

@@ -13,10 +13,10 @@ class InputValidation {
         validMenu.forEach { menu ->
             require(menu.contains("-"))
             val menuAndCount = menu.split("-")
-            val menuName = menuAndCount[0]
-            val menuCount = menuAndCount[1]
-            require(Menu.values().map { it.productName }.contains(menuName))
-            require((menuCount.toIntOrNull() != null) && (menuCount.toInt() > 0))
+            val productName = menuAndCount[0]
+            val productOrderCount = menuAndCount[1]
+            require(Menu.values().map { it.productName }.contains(productName))
+            require((productOrderCount.toIntOrNull() != null) && (productOrderCount.toInt() > 0))
         }
     }
 
