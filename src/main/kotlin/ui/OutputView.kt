@@ -2,7 +2,6 @@ package ui
 
 import model.Benefit
 import model.Menu
-import model.OrderMenu
 
 class OutputView {
     fun printWelcome() = println(WELCOME)
@@ -18,7 +17,7 @@ class OutputView {
         println()
     }
 
-    fun printTotalAmount(totalAmount: Int) {
+    fun printTotalAmount(totalAmount: String) {
         println(TOTAL_AMOUNT_HEADER)
         println("${AMOUNT_FORMAT.format(totalAmount)}\n")
     }
