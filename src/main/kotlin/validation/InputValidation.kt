@@ -1,10 +1,11 @@
 package validation
 
+import model.Menu
+
 class InputValidation {
-    fun validateDay(day: String): Int {
+    fun validateDay(day: String) {
         require((day.toIntOrNull() != null) && (day.toInt() > 0))
         require(day.toInt() in VALID_DAY)
-        return day.toInt()
     }
 
     companion object {
