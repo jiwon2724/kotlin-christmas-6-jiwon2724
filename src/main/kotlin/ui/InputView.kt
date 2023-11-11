@@ -15,6 +15,17 @@ class InputView(private val inputValidation: InputValidation = InputValidation()
         }
     }
 
+    fun readMenu(errorMessage: () -> Unit): String {
+        val inputMenu = Console.readLine()
+        return try {
+            inputValidation.validateMenu(inputMenu)
+            inputMenu
+        } catch (e: IllegalArgumentException) {
+            errorMessage()
+            readMenu(errorMessage)
+        }
+    }
+
     companion object {
 
     }
