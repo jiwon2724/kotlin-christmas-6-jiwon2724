@@ -18,7 +18,7 @@ enum class Menu(
     CHOCO_CAKE(productName = "초코케이크", type = "디저트", price = 15000),
     ICE_CREAM(productName = "아이스크림", type = "디저트", price = 5000),
 
-    ZERO_COLA(productName = "제로콜라", type = "음료", price = 3500),
+    ZERO_COLA(productName = "제로콜라", type = "음료", price = 3000),
     RED_WINE(productName = "레드와인", type = "음료", price = 60000),
     CHAMPAGNE(productName = "샴페인", type = "음료", price = 25000);
 }
