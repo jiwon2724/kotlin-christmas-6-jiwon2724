@@ -2,6 +2,7 @@ package ui
 
 import model.Benefit
 import model.Menu
+import model.OrderMenu
 
 class OutputView {
     fun printWelcome() = println(WELCOME)
@@ -9,10 +10,10 @@ class OutputView {
     fun promptMenuAndCount() = println(ORDER_MENU_AND_COUNT)
     fun printEventPreview(day: Int) = println(EVENT_BENEFIT_PREVIEW.format(day))
 
-    fun printOrderMenus(orderMenu: List<Menu>) {
+    fun printOrderMenus(orderMenu: List<OrderMenu>) {
         println(ORDER_MENU_HEADER)
         orderMenu.forEach { menu ->
-            println(MENU_FORMAT.format(menu.name, menu.count))
+            println(MENU_FORMAT.format(menu.productName, menu.count))
         }
         println()
     }

@@ -3,7 +3,6 @@ package model
 enum class Menu(
     val productName: String,
     val type: String,
-    val count: Int = 0,
     val price: Int
 ) {
     MUSHROOM_SOUP(productName = "양송이수프", type = "에피타이저", price = 6000),

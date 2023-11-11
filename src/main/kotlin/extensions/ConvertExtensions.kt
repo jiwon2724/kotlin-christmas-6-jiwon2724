@@ -8,10 +8,7 @@ fun String.toOrderMenu(): List<OrderMenu> {
         val menuAndCount = menu.split("-")
         val productName = menuAndCount[0]
         val productOrderCount = menuAndCount[1].toInt()
-        orderMenu.add(OrderMenu(
-            productName = productName,
-            count = productOrderCount
-        ))
+        orderMenu.add(OrderMenu(productName = productName, count = productOrderCount))
     }
     return orderMenu
 }
