@@ -51,6 +51,9 @@ class OutputView {
         println(eventBadge)
     }
 
+    fun printInvalidDay() = println(INVALID_DAY)
+    fun printInvalidMenu() = println(INVALID_MENU)
+
     companion object {
         private const val AMOUNT_FORMAT = "%s원"
         private const val MENU_FORMAT = "%s원"
@@ -66,5 +69,9 @@ class OutputView {
         private const val TOTAL_BENEFIT_AMOUNT = "<총혜택 금액>"
         private const val EXPECTED_PAYMENT_AFTER_DISCOUNT_HEADER = "<할인 후 예상 결제 금액>"
         private const val EVENT_BADGE_HEADER = "<12월 이벤트 배지>"
+
+        private const val ERROR = "[ERROR]"
+        private const val INVALID_DAY = "$ERROR 유효하지 않은 날짜입니다. 다시 입력해 주세요."
+        private const val INVALID_MENU = "$ERROR 유효하지 않은 주문입니다. 다시 입력해 주세요."
     }
 }
