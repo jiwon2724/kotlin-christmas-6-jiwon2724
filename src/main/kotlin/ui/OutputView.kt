@@ -25,7 +25,11 @@ class OutputView {
 
     fun printPresentMenu(presentMenu: Menu) {
         println(PRESENT_MENU_HEADER)
-        println("${MENU_FORMAT.format(presentMenu.name, presentMenu.count)}\n")
+        if (presentMenu.count == 1) {
+            println("${MENU_FORMAT.format(presentMenu.productName, presentMenu.count)}\n")
+            return
+        }
+        println(NOTHING)
     }
 
     fun printBenefitDetails(benefitDetails: List<Benefit>) {
@@ -73,5 +77,6 @@ class OutputView {
         private const val ERROR = "[ERROR]"
         private const val INVALID_DAY = "$ERROR 유효하지 않은 날짜입니다. 다시 입력해 주세요."
         private const val INVALID_MENU = "$ERROR 유효하지 않은 주문입니다. 다시 입력해 주세요."
+        private const val NOTHING = "없음"
     }
 }
