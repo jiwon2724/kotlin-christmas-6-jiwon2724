@@ -1,7 +1,7 @@
 package extensions
 
 import model.Menu
-import model.OrderMenu
+import java.text.DecimalFormat
 
 fun String.toOrderMenu(): List<Menu> {
     val orderMenu = arrayListOf<Menu>()
@@ -14,3 +14,6 @@ fun String.toOrderMenu(): List<Menu> {
     }
     return orderMenu
 }
+
+private val moneyFormat = DecimalFormat("#,###")
+fun Int.toFormattedMoney(): String = moneyFormat.format(this)
