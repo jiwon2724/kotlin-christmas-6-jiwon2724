@@ -1,6 +1,6 @@
 package validation
 
-import model.Menu
+import model.menu.Menu
 
 class InputValidation {
     fun validateDay(day: String) {

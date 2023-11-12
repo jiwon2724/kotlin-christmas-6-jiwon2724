@@ -1,6 +1,6 @@
 package extensions
 
-import model.Menu
+import model.menu.Menu
 import java.text.DecimalFormat
 
 fun String.toOrderMenu(): List<Menu> {

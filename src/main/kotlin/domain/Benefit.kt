@@ -1,8 +1,8 @@
 package domain
 
 import model.EventDay
-import model.Menu
-import model.Type
+import model.menu.Menu
+import model.menu.MenuType
 
 class Benefit(
     private val reserveDay: Int,
@@ -19,7 +19,7 @@ class Benefit(
     private fun weekEvent(): Int {
         if (EventDay.WEEKDAY.day.contains(reserveDay)) {
             var dessertCount = 0
-            orderMenu.filter { it.type == Type.DESSERT }.forEach { dessertCount += it.count }
+            orderMenu.filter { it.type == MenuType.DESSERT }.forEach { dessertCount += it.count }
             return -(dessertCount * DAY_DISCOUNT)
         }
         return NOTHING

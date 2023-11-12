@@ -2,7 +2,7 @@ package ui
 
 import domain.BadgeType
 import model.BenefitType
-import model.Menu
+import model.menu.Menu
 
 class OutputView {
     fun printWelcome() = println(WELCOME)
