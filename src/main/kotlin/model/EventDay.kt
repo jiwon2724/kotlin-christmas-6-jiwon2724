@@ -1,6 +1,6 @@
 package model
 
-enum class EventDay(private val day: IntArray) {
+enum class EventDay(val day: IntArray) {
     WEEKDAY(
         intArrayOf(
             3, 4, 5, 6, 7,
