@@ -1,5 +1,6 @@
 package domain
 
+import model.BenefitType
 import model.EventDay
 import model.menu.MenuType
 import model.menu.OrderMenu
@@ -39,12 +40,15 @@ class Benefit(
         return weekdayEvent()
     }
 
+    fun getBenefitDay(): BenefitType {
+        if (EventDay.WEEKEND.day.contains(reserveDay)) return BenefitType.WEEKDAY
+        return BenefitType.WEEKEND
+    }
+
     fun allBenefit(): List<Int> {
         val champagne = -(present.giveChampagne().let { it.menu.price * it.count })
         return listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), champagne)
     }
-
-
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
         private const val CHRISTMAS_DISCOUNT_AMOUNT = 100
