@@ -34,13 +34,13 @@ class OutputView {
         println(NOTHING)
     }
 
-    fun printBenefitDetails(discount: List<Int>) {
+    fun printBenefitDetails(discount: List<Int>, day: BenefitType) {
         println(BENEFIT_DETAILS_HEADER)
         if (discount.all { it == 0 }) {
             println(NOTHING)
             return
         }
-        BenefitType.values().forEachIndexed { index, benefit ->
+        BenefitType.values().filter { it != day }.forEachIndexed { index, benefit ->
             if (discount[index] != 0) {
                 println(BENEFIT_DETAILS.format(benefit.type, discount[index].toFormattedMoney()))
             }
