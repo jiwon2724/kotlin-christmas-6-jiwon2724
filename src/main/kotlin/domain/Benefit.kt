@@ -40,7 +40,7 @@ class Benefit(
     }
 
     fun allBenefit(): List<Int> {
-        val champagne = present.giveChampagne().let { it.menu.price * it.count }
+        val champagne = -(present.giveChampagne().let { it.menu.price * it.count })
         return listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), champagne)
     }
 
