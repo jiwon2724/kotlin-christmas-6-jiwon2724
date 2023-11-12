@@ -17,7 +17,7 @@ class Badge(private val benefitAmount: Int) {
     }
 }
 
-enum class BadgeType(private val type: String) {
+enum class BadgeType(val type: String) {
     STAR("별"),
     TREE("트리"),
     SANTA("산타"),

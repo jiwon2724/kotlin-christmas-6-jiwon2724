@@ -1,6 +1,6 @@
 package ui
 
-import domain.Discount
+import domain.BadgeType
 import model.BenefitType
 import model.Menu
 
@@ -52,9 +52,9 @@ class OutputView {
         println("${AMOUNT_FORMAT.format(payment)}\n")
     }
 
-    fun printEventBadge(eventBadge: String) {
+    fun printEventBadge(eventBadge: BadgeType) {
         println(EVENT_BADGE_HEADER)
-        println(eventBadge)
+        println(eventBadge.type)
     }
 
     fun printInvalidDay() = println(INVALID_DAY)
