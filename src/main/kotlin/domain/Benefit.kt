@@ -7,14 +7,14 @@ class Benefit(
     private val reserveDay: Int,
     private val orderMenu: List<Menu>
 ) {
-    fun christmas(): Int {
+    fun christmasEvent(): Int {
         if (EventDay.CHRISTMAS.day.contains(reserveDay)) {
             return -((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT
         }
         return NOTHING
     }
 
-    fun weekDay(): Int {
+    fun weekEvent(): Int {
         // type도 enum class로 리팩토링 하기
         if (EventDay.WEEKDAY.day.contains(reserveDay)) {
             val dessertCount = orderMenu.count { it.type == "디저트" }
@@ -23,7 +23,7 @@ class Benefit(
         return NOTHING
     }
 
-    fun weekendDay(): Int {
+    fun weekendEvent(): Int {
         // type도 enum class로 리팩토링 하기
         if (EventDay.WEEKEND.day.contains(reserveDay)) {
             val mainMenuCount = orderMenu.count { it.type == "메인" }
@@ -31,6 +31,11 @@ class Benefit(
         }
         return NOTHING
     }
+
+    fun specialEvent() {
+
+    }
+
 
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
