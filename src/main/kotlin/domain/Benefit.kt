@@ -39,6 +39,10 @@ class Benefit(
         return NOTHING
     }
 
+    fun totalBenefitAmount(): Int {
+        return christmasEvent() + weekEvent() + weekendEvent() + specialEvent()
+    }
+
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
         private const val CHRISTMAS_DISCOUNT_AMOUNT = 100
