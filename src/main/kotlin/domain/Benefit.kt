@@ -16,23 +16,17 @@ class Benefit(
         return NOTHING
     }
 
-    private fun weekEvent(): Int {
-        if (EventDay.WEEKDAY.day.contains(reserveDay)) {
-            var dessertCount = 0
-            orderMenu
-                .filter { order -> order.menu.type == MenuType.DESSERT }
-                .forEach { dessert ->  dessertCount += dessert.count }
-            return -(dessertCount * DAY_DISCOUNT)
-        }
-        return NOTHING
+    private fun weekdayEvent(): Int {
+        var dessertCount = 0
+        orderMenu
+            .filter { order -> order.menu.type == MenuType.DESSERT }
+            .forEach { dessert ->  dessertCount += dessert.count }
+        return -(dessertCount * DAY_DISCOUNT)
     }
 
     private fun weekendEvent(): Int {
-        if (EventDay.WEEKEND.day.contains(reserveDay)) {
-            val mainMenuCount = orderMenu.count { order -> order.menu.type == MenuType.MAIN }
-            return -(mainMenuCount * DAY_DISCOUNT)
-        }
-        return NOTHING
+        val mainMenuCount = orderMenu.count { order -> order.menu.type == MenuType.MAIN }
+        return -(mainMenuCount * DAY_DISCOUNT)
     }
 
     private fun specialEvent(): Int {
@@ -40,9 +34,14 @@ class Benefit(
         return NOTHING
     }
 
+   private fun checkWeekdayAndWeekend(): Int {
+        if (EventDay.WEEKEND.day.contains(reserveDay)) return weekendEvent()
+        return weekdayEvent()
+    }
+
     fun allBenefit(): List<Int> {
         val champagne = present.giveChampagne().let { it.menu.price * it.count }
-        return listOf(christmasEvent(), weekEvent(), specialEvent(), champagne)
+        return listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), champagne)
     }
 
 
