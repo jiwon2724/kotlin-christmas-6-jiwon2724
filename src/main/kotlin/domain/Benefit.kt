@@ -41,6 +41,13 @@ class Benefit(
         return NOTHING
     }
 
+    fun allBenefit(): List<Int> {
+        if (present.giveChampagne().count == 1) {
+            return listOf(christmasEvent(), weekEvent(), specialEvent(), -25000)
+        }
+        return listOf(christmasEvent(), weekEvent(), specialEvent(), 0)
+    }
+
 
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
