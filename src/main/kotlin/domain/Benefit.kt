@@ -41,10 +41,8 @@ class Benefit(
     }
 
     fun allBenefit(): List<Int> {
-        if (present.giveChampagne().count == 1) {
-            return listOf(christmasEvent(), weekEvent(), specialEvent(), -25000)
-        }
-        return listOf(christmasEvent(), weekEvent(), specialEvent(), 0)
+        val champagne = present.giveChampagne().let { it.menu.price * it.count }
+        return listOf(christmasEvent(), weekEvent(), specialEvent(), champagne)
     }
 
 
