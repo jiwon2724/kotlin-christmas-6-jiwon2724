@@ -3,6 +3,10 @@ package domain
 import model.EventDay
 import model.Menu
 
+// 리팩토링
+// EventDay.XX.day << 함수로 빼서 만들기
+// type도 enum class로 리팩토링 하기
+
 class Benefit(
     private val reserveDay: Int,
     private val orderMenu: List<Menu>
@@ -15,27 +19,25 @@ class Benefit(
     }
 
     fun weekEvent(): Int {
-        // type도 enum class로 리팩토링 하기
         if (EventDay.WEEKDAY.day.contains(reserveDay)) {
             val dessertCount = orderMenu.count { it.type == "디저트" }
-            return dessertCount * DAY_DISCOUNT
+            return -(dessertCount * DAY_DISCOUNT)
         }
         return NOTHING
     }
 
     fun weekendEvent(): Int {
-        // type도 enum class로 리팩토링 하기
         if (EventDay.WEEKEND.day.contains(reserveDay)) {
             val mainMenuCount = orderMenu.count { it.type == "메인" }
-            return mainMenuCount * DAY_DISCOUNT
+            return -(mainMenuCount * DAY_DISCOUNT)
         }
         return NOTHING
     }
 
-    fun specialEvent() {
-
+    fun specialEvent(): Int {
+        if (EventDay.SPECIAL.day.contains(reserveDay)) return -SPECIAL_DISCOUNT
+        return NOTHING
     }
-
 
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
