@@ -1,5 +1,5 @@
 package extensions
 
-import model.menu.Menu
+import model.menu.OrderMenu
 
-fun List<Menu>.payment() = sumOf { it.count * it.price }
+fun List<OrderMenu>.payment() = sumOf { it.menu.price * it.count }

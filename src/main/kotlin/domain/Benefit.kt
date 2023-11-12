@@ -1,12 +1,12 @@
 package domain
 
 import model.EventDay
-import model.menu.Menu
 import model.menu.MenuType
+import model.menu.OrderMenu
 
 class Benefit(
     private val reserveDay: Int,
-    private val orderMenu: List<Menu>,
+    private val orderMenu: List<OrderMenu>,
     private val present: Present
 ) {
     private fun christmasEvent(): Int {
@@ -19,7 +19,9 @@ class Benefit(
     private fun weekEvent(): Int {
         if (EventDay.WEEKDAY.day.contains(reserveDay)) {
             var dessertCount = 0
-            orderMenu.filter { it.type == MenuType.DESSERT }.forEach { dessertCount += it.count }
+            orderMenu
+                .filter { order -> order.menu.type == MenuType.DESSERT }
+                .forEach { dessert ->  dessertCount += dessert.count }
             return -(dessertCount * DAY_DISCOUNT)
         }
         return NOTHING
@@ -27,7 +29,7 @@ class Benefit(
 
     private fun weekendEvent(): Int {
         if (EventDay.WEEKEND.day.contains(reserveDay)) {
-            val mainMenuCount = orderMenu.count { it.type == Type.MAIN }
+            val mainMenuCount = orderMenu.count { order -> order.menu.type == MenuType.MAIN }
             return -(mainMenuCount * DAY_DISCOUNT)
         }
         return NOTHING
