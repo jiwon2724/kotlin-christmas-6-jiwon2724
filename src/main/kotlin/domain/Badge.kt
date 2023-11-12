@@ -18,3 +18,5 @@ class Badge(private val benefitAmount: Int) {
         private val SANTA_RANGE = 20000 ..Int.MAX_VALUE
     }
 }
+
+// 총혜택 금액 = 할인 금액의 합계 + 증정 메뉴의 가격

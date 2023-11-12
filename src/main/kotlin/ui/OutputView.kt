@@ -32,18 +32,18 @@ class OutputView {
             return
         }
         println(NOTHING)
-        println()
     }
 
     fun printBenefitDetails(discount: List<Int>) {
         println(BENEFIT_DETAILS_HEADER)
         if (discount.all { it == 0 }) {
             println(NOTHING)
-            println()
             return
         }
         BenefitType.values().forEachIndexed { index, benefit ->
-            println(BENEFIT_DETAILS.format(benefit.type, discount[index].toFormattedMoney()))
+            if (discount[index] != 0) {
+                println(BENEFIT_DETAILS.format(benefit.type, discount[index].toFormattedMoney()))
+            }
         }
         println()
     }
@@ -85,6 +85,6 @@ class OutputView {
         private const val ERROR = "[ERROR]"
         private const val INVALID_DAY = "$ERROR 유효하지 않은 날짜입니다. 다시 입력해 주세요."
         private const val INVALID_MENU = "$ERROR 유효하지 않은 주문입니다. 다시 입력해 주세요."
-        private const val NOTHING = "없음"
+        private const val NOTHING = "없음\n"
     }
 }
