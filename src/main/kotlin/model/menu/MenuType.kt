@@ -1,5 +1,5 @@
 package model.menu
 
 enum class MenuType {
-    APPETIZER, DESSERT, MAIN, BEVERAGE
+    APPETIZER, DESSERT, MAIN, BEVERAGE, NOTHING
 }
