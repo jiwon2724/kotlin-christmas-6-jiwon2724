@@ -9,24 +9,26 @@ import model.Menu
 
 class Benefit(
     private val reserveDay: Int,
-    private val orderMenu: List<Menu>
+    private val orderMenu: List<Menu>,
+    private val present: Present
 ) {
-    fun christmasEvent(): Int {
+    private fun christmasEvent(): Int {
         if (EventDay.CHRISTMAS.day.contains(reserveDay)) {
-            return -((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT
+            return -(((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
         }
         return NOTHING
     }
 
-    fun weekEvent(): Int {
+    private fun weekEvent(): Int {
         if (EventDay.WEEKDAY.day.contains(reserveDay)) {
-            val dessertCount = orderMenu.count { it.type == "디저트" }
+            var dessertCount = 0
+            orderMenu.filter { it.type == "디저트" }.forEach { dessertCount += it.count }
             return -(dessertCount * DAY_DISCOUNT)
         }
         return NOTHING
     }
 
-    fun weekendEvent(): Int {
+    private fun weekendEvent(): Int {
         if (EventDay.WEEKEND.day.contains(reserveDay)) {
             val mainMenuCount = orderMenu.count { it.type == "메인" }
             return -(mainMenuCount * DAY_DISCOUNT)
@@ -39,9 +41,6 @@ class Benefit(
         return NOTHING
     }
 
-    fun totalBenefitAmount(): Int {
-        return christmasEvent() + weekEvent() + weekendEvent() + specialEvent()
-    }
 
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
