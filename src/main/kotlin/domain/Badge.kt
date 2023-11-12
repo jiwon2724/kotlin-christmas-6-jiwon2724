@@ -1,10 +1,11 @@
 package domain
 
 import model.BadgeType
+import kotlin.math.abs
 
 class Badge(private val benefitAmount: Int) {
     fun eventBadge(): BadgeType {
-        return when (benefitAmount) {
+        return when (abs(benefitAmount)) {
             in STAR_RANGE -> BadgeType.STAR
             in TREE_RANGE -> BadgeType.TREE
             in SANTA_RANGE -> BadgeType.SANTA
