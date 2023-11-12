@@ -1,16 +1,15 @@
 package extensions
 
 import model.menu.Menu
+import model.menu.OrderMenu
 import java.text.DecimalFormat
 
-fun String.toOrderMenu(): List<Menu> {
-    val orderMenu = arrayListOf<Menu>()
-    split(",").forEach { menu ->
-        val (productName, productOrderCount) = menu.split("-")
-        val product = Menu.values()
-            .first { it.productName == productName }
-            .apply { count = productOrderCount.toInt() }
-        orderMenu.add(product)
+fun String.toOrderMenu(): List<OrderMenu> {
+    val orderMenu = arrayListOf<OrderMenu>()
+    split(",").forEach { userInputMenu ->
+        val (menuName, menuCount) = userInputMenu.split("-")
+        val menu = Menu.values().first { it.menuName == menuName }
+        orderMenu.add(OrderMenu(menu = menu, count = menuCount.toInt()))
     }
     return orderMenu
 }
