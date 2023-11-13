@@ -45,11 +45,11 @@ class ChristmasPlanner(
         printTotalBenefitAmount(amount.totalBenefitAmount())
         printExpectedPaymentAfterDiscount(amount.beforeDiscountAmount() + amount.afterDiscountAmount())
 
-        eventBadge(amount)
+        eventBadge(benefit)
     }
 
-    private fun OutputView.eventBadge(amount: Amount) {
-        val badge = Badge(amount.beforeDiscountAmount())
+    private fun OutputView.eventBadge(benefit: Benefit) {
+        val badge = Badge((benefit.allBenefit().sumOf { it.disCount }))
         printEventBadge(badge.eventBadge())
     }
 }
