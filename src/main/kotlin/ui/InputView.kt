@@ -5,28 +5,29 @@ import validation.InputValidation
 
 class InputView(private val inputValidation: InputValidation = InputValidation()) {
     fun readDay(errorMessage: () -> Unit): String {
-        val inputDay = Console.readLine()
-        return try {
+        return handleException(errorMessage) {
+            val inputDay = Console.readLine()
             inputValidation.validateDay(inputDay)
             inputDay
-        } catch (e: IllegalArgumentException) {
-            errorMessage()
-            readDay(errorMessage)
         }
     }
 
     fun readMenu(errorMessage: () -> Unit): String {
-        val inputMenu = Console.readLine()
-        return try {
+        return handleException(errorMessage) {
+            val inputMenu = Console.readLine()
             inputValidation.validateMenu(inputMenu)
             inputMenu
-        } catch (e: IllegalArgumentException) {
-            errorMessage()
-            readMenu(errorMessage)
         }
     }
 
     companion object {
-
+        private fun handleException(errorMessage: () -> Unit, validate: () -> String): String {
+            return try {
+                validate()
+            } catch (e: IllegalArgumentException) {
+                errorMessage()
+                validate()
+            }
+        }
     }
 }
