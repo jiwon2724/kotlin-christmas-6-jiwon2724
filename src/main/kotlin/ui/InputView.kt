@@ -4,19 +4,18 @@ import camp.nextstep.edu.missionutils.Console
 import validation.InputValidation
 
 class InputView(private val inputValidation: InputValidation = InputValidation()) {
-    fun readDay(errorMessage: () -> Unit): String {
-        return handleException(errorMessage) {
-            val inputDay = Console.readLine()
-            inputValidation.validateDay(inputDay)
-            inputDay
+    fun readDay(errorMessage: () -> Unit): String = handleException(errorMessage) {
+        Console.readLine().let { day ->
+            inputValidation.validateDay(day)
+            day
         }
     }
 
-    fun readMenu(errorMessage: () -> Unit): String {
-        return handleException(errorMessage) {
-            val inputMenu = Console.readLine()
-            inputValidation.validateMenu(inputMenu)
-            inputMenu
+
+    fun readMenu(errorMessage: () -> Unit): String = handleException(errorMessage) {
+        Console.readLine().let { menu ->
+            inputValidation.validateMenu(menu)
+            menu
         }
     }
 
