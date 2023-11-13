@@ -5,5 +5,11 @@ enum class BenefitType(val type: String) {
     WEEKDAY("평일 할인"),
     WEEKEND("주말 할인"),
     SPECIAL("특별 할인"),
-    PRESENT_EVENT("증정 이벤트");
+    PRESENT_EVENT("증정 이벤트"),
+    NOTING("없음");
 }
+
+data class BenefitDetail(
+    val type: BenefitType,
+    val disCount: Int = 0
+)

@@ -1,5 +1,6 @@
 package domain
 
+import model.BenefitDetail
 import model.BenefitType
 import model.EventDay
 import model.menu.MenuType
@@ -10,52 +11,52 @@ class Benefit(
     private val orderMenu: List<OrderMenu>,
     private val present: Present
 ) {
-    private fun christmasEvent(): Int {
+    private fun christmasEvent(): BenefitDetail {
         if (EventDay.CHRISTMAS.day.contains(reserveDay)) {
-            return -(((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
+            val disCount = -(((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
+            return BenefitDetail(BenefitType.CHRISTMAS_D_DAY, disCount)
         }
-        return NOTHING
+        return BenefitDetail(BenefitType.NOTING)
     }
 
-    private fun weekdayEvent(): Int {
+    private fun weekdayEvent(): BenefitDetail {
         var dessertCount = 0
         orderMenu
             .filter { order -> order.menu.type == MenuType.DESSERT }
             .forEach { dessert ->  dessertCount += dessert.count }
-        return -(dessertCount * DAY_DISCOUNT)
+        val disCount = -(dessertCount * DAY_DISCOUNT)
+        return BenefitDetail(BenefitType.WEEKDAY, disCount)
     }
 
-    private fun weekendEvent(): Int {
+    private fun weekendEvent(): BenefitDetail {
         val mainMenuCount = orderMenu.count { order -> order.menu.type == MenuType.MAIN }
-        return -(mainMenuCount * DAY_DISCOUNT)
+        val disCount = -(mainMenuCount * DAY_DISCOUNT)
+        return BenefitDetail(BenefitType.WEEKEND, disCount)
     }
 
-    private fun specialEvent(): Int {
-        if (EventDay.SPECIAL.day.contains(reserveDay)) return -SPECIAL_DISCOUNT
-        return NOTHING
+    private fun specialEvent(): BenefitDetail {
+        if (EventDay.SPECIAL.day.contains(reserveDay)) return BenefitDetail(BenefitType.SPECIAL, -SPECIAL_DISCOUNT)
+        return BenefitDetail(BenefitType.NOTING)
     }
 
-   private fun checkWeekdayAndWeekend(): Int {
-        if (EventDay.WEEKEND.day.contains(reserveDay)) return weekendEvent()
-        return weekdayEvent()
+    private fun presentEvent(): BenefitDetail {
+        val disCount = -(present.giveChampagne().let { it.menu.price * it.count })
+        if (disCount != 0) return BenefitDetail(BenefitType.PRESENT_EVENT, disCount)
+        return BenefitDetail(BenefitType.NOTING)
     }
 
-    fun getBenefitDay(): BenefitType {
-        if (EventDay.WEEKEND.day.contains(reserveDay)) return BenefitType.WEEKDAY
-        return BenefitType.WEEKEND
+   private fun checkWeekdayAndWeekend(): BenefitDetail {
+        if (EventDay.WEEKEND.day.contains(reserveDay)) return weekdayEvent()
+        return weekendEvent()
     }
+    fun allBenefit(): List<BenefitDetail> =
+        listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), presentEvent())
 
-    fun allBenefit(): List<Int> {
-        val champagne = -(present.giveChampagne().let { it.menu.price * it.count })
-        return listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), champagne)
-    }
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
         private const val CHRISTMAS_DISCOUNT_AMOUNT = 100
 
         private const val DAY_DISCOUNT = 2023
         private const val SPECIAL_DISCOUNT = 1000
-
-        private const val NOTHING = 0
     }
 }
