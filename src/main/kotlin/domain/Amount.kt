@@ -18,10 +18,4 @@ class Amount(
         .allBenefit()
         .filter { it.type != BenefitType.PRESENT_EVENT }
         .sumOf { it.disCount }
-
-    fun isMinimumAmount(): Boolean = MINIMUM_PAYMENT_AMOUNT <= beforeDiscountAmount()
-
-    companion object {
-        const val MINIMUM_PAYMENT_AMOUNT = 10_000
-    }
 }
