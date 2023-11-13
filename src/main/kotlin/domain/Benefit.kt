@@ -7,13 +7,13 @@ import model.menu.MenuType
 import model.menu.OrderMenu
 
 class Benefit(
-    private val reserveDay: Int,
+    private val expectDay: Int,
     private val orderMenu: List<OrderMenu>,
     private val present: Present
 ) {
     private fun christmasEvent(): BenefitDetail {
-        if (EventDay.CHRISTMAS.day.contains(reserveDay)) {
-            val disCount = -(((reserveDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
+        if (EventDay.CHRISTMAS.day.contains(expectDay)) {
+            val disCount = -(((expectDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
             return BenefitDetail(BenefitType.CHRISTMAS_D_DAY, disCount)
         }
         return BenefitDetail(BenefitType.NOTING)
@@ -35,7 +35,7 @@ class Benefit(
     }
 
     private fun specialEvent(): BenefitDetail {
-        if (EventDay.SPECIAL.day.contains(reserveDay)) return BenefitDetail(BenefitType.SPECIAL, -SPECIAL_DISCOUNT)
+        if (EventDay.SPECIAL.day.contains(expectDay)) return BenefitDetail(BenefitType.SPECIAL, -SPECIAL_DISCOUNT)
         return BenefitDetail(BenefitType.NOTING)
     }
 
@@ -46,7 +46,7 @@ class Benefit(
     }
 
    private fun checkWeekdayAndWeekend(): BenefitDetail {
-        if (EventDay.WEEKEND.day.contains(reserveDay)) return weekdayEvent()
+        if (EventDay.WEEKEND.day.contains(expectDay)) return weekdayEvent()
         return weekendEvent()
     }
     fun allBenefit(): List<BenefitDetail> =
