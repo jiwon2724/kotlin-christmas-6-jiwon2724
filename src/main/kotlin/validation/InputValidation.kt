@@ -16,7 +16,7 @@ class InputValidation {
             val (menuName, productOrderCount) = menu.split("-")
             orderResult.add(menuName)
             require(Menu.values().map { it.menuName }.contains(menuName))
-            require((productOrderCount.toIntOrNull() != null) && (productOrderCount.toInt() > 0))
+            require((productOrderCount.toIntOrNull() != null) && (productOrderCount.toInt() < 0))
         }
         val beverage = Menu.values().filter { it.type == MenuType.BEVERAGE }.map { it.menuName }
         require(!orderResult.all { beverage.contains(it) })
