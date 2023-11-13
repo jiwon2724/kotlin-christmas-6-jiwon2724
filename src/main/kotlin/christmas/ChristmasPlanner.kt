@@ -29,27 +29,27 @@ class ChristmasPlanner(
     }
 
     private fun OutputView.promptOrderMenu(): List<OrderMenu> {
-        val orderMenu = inputView.readMenu { printInvalidMenu() }.toOrderMenu()
-        printOrderMenus(orderMenu)
-        return orderMenu
+        promptMenuAndCount()
+        return inputView.readMenu { printInvalidMenu() }.toOrderMenu()
     }
 
     private fun OutputView.discountEvent(orderMenu: List<OrderMenu>, expectDay: Int) {
         val present = Present(orderMenu)
         val benefit = Benefit(orderMenu = orderMenu, expectDay = expectDay, present = present)
         val amount = Amount(orderMenu, benefit)
+        benefit.setBeforeDiscountAmount(amount.beforeDiscountAmount())
 
         printTotalAmount(amount.beforeDiscountAmount().toFormattedMoney())
         printPresentMenu(present.giveChampagne())
-        if (!amount.isMinimumAmount()) printBenefitDetails(benefit.allBenefit()) else printBenefitDetails()
+        printBenefitDetails(benefit.allBenefit())
         printTotalBenefitAmount(amount.totalBenefitAmount())
-        printExpectedPaymentAfterDiscount(amount.beforeDiscountAmount() + amount.totalBenefitAmount())
+        printExpectedPaymentAfterDiscount(amount.beforeDiscountAmount() + amount.afterDiscountAmount())
 
         eventBadge(amount)
     }
 
     private fun OutputView.eventBadge(amount: Amount) {
-        val badge = Badge(amount.afterDiscountAmount())
+        val badge = Badge(amount.beforeDiscountAmount())
         printEventBadge(badge.eventBadge())
     }
 }
