@@ -1,6 +1,6 @@
 package model.benefit
 
-enum class BenefitType(val type: String) {
+enum class BenefitType(val discountName: String) {
     CHRISTMAS_D_DAY("크리스마스 디데이 할인"),
     WEEKDAY("평일 할인"),
     WEEKEND("주말 할인"),
