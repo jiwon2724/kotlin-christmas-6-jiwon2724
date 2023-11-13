@@ -21,7 +21,7 @@ class InputValidation {
         val beverage = Menu.values().filter { it.type == MenuType.BEVERAGE }.map { it.menuName }
         require(!orderResult.all { beverage.contains(it.first) })
         require(orderResult.sumOf { it.second } <= MAX_ORDER_COUNT)
-        require(orderResult.size == orderResult.distinct().size)
+        require(orderResult.size == orderResult.map { it.first }.distinct().size)
     }
 
     companion object {
