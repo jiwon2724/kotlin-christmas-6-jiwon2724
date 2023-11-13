@@ -33,9 +33,9 @@ class OutputView {
         println(NOTHING)
     }
 
-    fun printBenefitDetails(benefitDetail: List<BenefitDetail>) {
+    fun printBenefitDetails(benefitDetail: List<BenefitDetail> = listOf()) {
         println(BENEFIT_DETAILS_HEADER)
-        if (benefitDetail.all { it.disCount == 0 }) {
+        if (benefitDetail.isEmpty() || benefitDetail.all { it.disCount == 0 }) {
             println(NOTHING)
             return
         }
