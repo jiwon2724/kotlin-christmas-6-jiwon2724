@@ -1,8 +1,9 @@
 package ui
 
 import extensions.toFormattedMoney
-import model.BadgeType
-import model.BenefitType
+import model.badge.BadgeType
+import model.benefit.BenefitDetail
+import model.benefit.BenefitType
 import model.menu.OrderMenu
 
 class OutputView {
@@ -13,9 +14,7 @@ class OutputView {
 
     fun printOrderMenus(orderMenu: List<OrderMenu>) {
         println(ORDER_MENU_HEADER)
-        orderMenu.forEach { order ->
-            println(MENU_FORMAT.format(order.menu.menuName, order.count))
-        }
+        orderMenu.forEach { order -> println(MENU_FORMAT.format(order.menu.menuName, order.count)) }
         println()
     }
 
@@ -34,15 +33,15 @@ class OutputView {
         println(NOTHING)
     }
 
-    fun printBenefitDetails(discount: List<Int>, day: BenefitType) {
+    fun printBenefitDetails(benefitDetail: List<BenefitDetail>) {
         println(BENEFIT_DETAILS_HEADER)
-        if (discount.all { it == 0 }) {
+        if (benefitDetail.all { it.disCount == 0 }) {
             println(NOTHING)
             return
         }
-        BenefitType.values().filter { it != day }.forEachIndexed { index, benefit ->
-            if (discount[index] != 0) {
-                println(BENEFIT_DETAILS.format(benefit.type, discount[index].toFormattedMoney()))
+        benefitDetail.forEach { benefit ->
+            if (benefit.type != BenefitType.NOTING) {
+                println(BENEFIT_DETAILS.format(benefit.type, benefit.disCount.toFormattedMoney()))
             }
         }
         println()
