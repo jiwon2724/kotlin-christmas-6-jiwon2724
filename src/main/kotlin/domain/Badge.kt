@@ -1,6 +1,6 @@
 package domain
 
-import model.BadgeType
+import model.badge.BadgeType
 import kotlin.math.abs
 
 class Badge(private val benefitAmount: Int) {

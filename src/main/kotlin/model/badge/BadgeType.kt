@@ -1,4 +1,4 @@
-package model
+package model.badge
 
 enum class BadgeType(val type: String) {
     STAR("별"),

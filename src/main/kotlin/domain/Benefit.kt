@@ -1,8 +1,8 @@
 package domain
 
-import model.BenefitDetail
-import model.BenefitType
-import model.EventDay
+import model.benefit.BenefitDetail
+import model.benefit.BenefitType
+import model.benefit.EventDay
 import model.menu.MenuType
 import model.menu.OrderMenu
 

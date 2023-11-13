@@ -1,4 +1,4 @@
-package model
+package model.benefit
 
 enum class EventDay(val day: IntArray) {
     WEEKDAY(

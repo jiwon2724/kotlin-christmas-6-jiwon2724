@@ -1,4 +1,4 @@
-package model
+package model.benefit
 
 enum class BenefitType(val type: String) {
     CHRISTMAS_D_DAY("크리스마스 디데이 할인"),
@@ -8,8 +8,3 @@ enum class BenefitType(val type: String) {
     PRESENT_EVENT("증정 이벤트"),
     NOTING("없음");
 }
-
-data class BenefitDetail(
-    val type: BenefitType,
-    val disCount: Int = 0
-)
