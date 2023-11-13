@@ -41,13 +41,13 @@ class OutputView {
         }
         benefitDetail.forEach { benefit ->
             if (benefit.type != BenefitType.NOTING) {
-                println(BENEFIT_DETAILS.format(benefit.type, benefit.disCount.toFormattedMoney()))
+                println(BENEFIT_DETAILS.format(benefit.type.discountName, benefit.disCount.toFormattedMoney()))
             }
         }
         println()
     }
 
-    fun printTotalBenefitAmount(amount: Int) {
+    fun printTotalBenefitAmount(amount: Int = 0) {
         println(TOTAL_BENEFIT_AMOUNT)
         println("${AMOUNT_FORMAT.format(amount.toFormattedMoney())}\n")
     }
