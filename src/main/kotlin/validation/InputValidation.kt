@@ -1,6 +1,7 @@
 package validation
 
 import model.menu.Menu
+import model.menu.MenuType
 
 class InputValidation {
     fun validateDay(day: String) {
@@ -8,25 +9,18 @@ class InputValidation {
         require(day.toInt() in VALID_DAY)
     }
 
-    // 주석 작성한 부분 구현 끝난 후 함수로 분리해야해!
     fun validateMenu(orderMenu: String) {
-        val validMenu = orderMenu.split(",")
         val orderResult = arrayListOf<String>()
-        validMenu.forEach { menu ->
+        orderMenu.split(",").forEach { menu ->
             require(menu.contains("-"))
-            val (productName, productOrderCount) = menu.split("-")
-            orderResult.add(productName)
-            require(Menu.values().map { it.productName }.contains(productName))
+            val (menuName, productOrderCount) = menu.split("-")
+            orderResult.add(menuName)
+            require(Menu.values().map { it.menuName }.contains(menuName))
             require((productOrderCount.toIntOrNull() != null) && (productOrderCount.toInt() > 0))
         }
-        // 음료만 주문시
-        val beverage = Menu.values().filter { it.type == "음료" }.map { it.productName }
+        val beverage = Menu.values().filter { it.type == MenuType.BEVERAGE }.map { it.menuName }
         require(!orderResult.all { beverage.contains(it) })
-
-        // 메뉴 최대 20개
         require(orderResult.size <= MAX_ORDER_COUNT)
-
-        // 중복 메뉴
         require(orderResult.size == orderResult.distinct().size)
     }
 
