@@ -11,6 +11,11 @@ class Benefit(
     private val orderMenu: List<OrderMenu>,
     private val present: Present
 ) {
+
+    private var _beforeDiscountAmount: Int = 0
+    private val beforeDiscountAmount: Int
+        get() = _beforeDiscountAmount
+
     private fun christmasEvent(): BenefitDetail {
         if (EventDay.CHRISTMAS.day.contains(expectDay)) {
             val disCount = -(((expectDay-1) * CHRISTMAS_DISCOUNT_AMOUNT) + CHRISTMAS_BENEFIT_AMOUNT)
@@ -29,7 +34,10 @@ class Benefit(
     }
 
     private fun weekendEvent(): BenefitDetail {
-        val mainMenuCount = orderMenu.count { order -> order.menu.type == MenuType.MAIN }
+        var mainMenuCount = 0
+        orderMenu
+            .filter { order -> order.menu.type == MenuType.MAIN }
+            .forEach { mainMenu -> mainMenuCount += mainMenu.count }
         val disCount = -(mainMenuCount * DAY_DISCOUNT)
         return BenefitDetail(BenefitType.WEEKEND, disCount)
     }
@@ -46,11 +54,20 @@ class Benefit(
     }
 
    private fun checkWeekdayAndWeekend(): BenefitDetail {
-        if (EventDay.WEEKEND.day.contains(expectDay)) return weekdayEvent()
-        return weekendEvent()
+        if (EventDay.WEEKEND.day.contains(expectDay)) return weekendEvent()
+        return weekdayEvent()
     }
-    fun allBenefit(): List<BenefitDetail> =
-        listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), presentEvent())
+
+    fun setBeforeDiscountAmount(amount: Int) {
+        _beforeDiscountAmount = amount
+    }
+
+    fun allBenefit(): List<BenefitDetail> {
+        if (beforeDiscountAmount >= MINIMUM_PAYMENT_AMOUNT) {
+            return listOf(christmasEvent(), checkWeekdayAndWeekend(), specialEvent(), presentEvent())
+        }
+        return emptyList()
+    }
 
     companion object {
         private const val CHRISTMAS_BENEFIT_AMOUNT = 1000
@@ -58,5 +75,7 @@ class Benefit(
 
         private const val DAY_DISCOUNT = 2023
         private const val SPECIAL_DISCOUNT = 1000
+
+        const val MINIMUM_PAYMENT_AMOUNT = 10_000
     }
 }
