@@ -1,5 +1,6 @@
 package christmas
 
+import domain.Badge
 import domain.Benefit
 import domain.Present
 import model.menu.Menu
