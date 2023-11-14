@@ -6,7 +6,6 @@ import domain.Amount
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-
 class AmountTest {
     @Test
     fun `할인 전 총 주문 금액이 맞는지 확인`() {
